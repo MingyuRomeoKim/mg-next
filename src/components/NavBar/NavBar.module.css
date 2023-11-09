@@ -1,0 +1,34 @@
+/* NavBar.module.css */
+.navBar {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+.navList {
+    list-style: none;
+    display: flex;
+    gap: 20px; /* 각 항목 사이에 간격을 추가 */
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+}
+
+.navItem {
+    /* 필요한 스타일을 추가합니다. */
+}
+
+.navLink {
+    text-align: center;
+    text-decoration: none;
+    color: white;
+}
+
+.navLink:hover {
+    color: #ddd;
+}
+
+.navLink:focus {
+    color: #ccc;
+}

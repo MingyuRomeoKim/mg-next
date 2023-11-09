@@ -1,0 +1,28 @@
+/* components/SideBar/SideBar.module.css */
+
+.sideBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px; /* 사이드바의 너비를 설정합니다 */
+    height: 100%;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+}
+
+.navList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navItem {
+    padding: 10px;
+    border-bottom: 1px solid #444; /* 각 항목을 구분하기 위한 테두리를 추가합니다 */
+}
+
+/* 사이드바 항목에 마우스를 올렸을 때의 스타일 */
+.navItem:hover {
+    background-color: #444;
+}
