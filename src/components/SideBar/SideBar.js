@@ -14,7 +14,7 @@ const SideBar = () => {
                         {category.label.includes('#') ? (
                             <span>{category.label}</span>
                         ) : (
-                            <Link href={`/${category.name}`}>
+                            <Link href={`/${category.name}?categoryId=${category.id}`}>
                                 {category.label}
                             </Link>
                         )}
@@ -23,7 +23,7 @@ const SideBar = () => {
                             <ul className={styles.subNavList}>
                                 {category.subCategories.map((subCategory) => (
                                     <li key={subCategory.id} className={styles.subNavItem}>
-                                        <Link href={`/${category.name}/${subCategory.name}`}>
+                                        <Link href={`/${category.name}/${subCategory.name}?categoryId=${subCategory.id}`}>
                                             {subCategory.label}
                                         </Link>
                                     </li>
