@@ -10,11 +10,17 @@
 
 .list {
     margin: 20px;
-    border: 2px solid whitesmoke;
+    border: 2px solid slategray;
     border-radius: 10px 10px 10px 10px;
 }
 
 .listHead {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.listContent {
     margin: 20px;
     display: flex;
     justify-content: center;

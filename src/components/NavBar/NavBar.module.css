@@ -32,3 +32,24 @@
 .navLink:focus {
     color: #ccc;
 }
+
+/* "메뉴 펼치기" 버튼 관련 스타일 */
+.menuToggle {
+    display: none; /* 기본적으로는 숨김 */
+    padding: 10px 20px;
+    background-color: #444;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* 모바일 화면에서만 버튼 보임 */
+@media screen and (max-width: 600px) {
+    .menuToggle {
+        display: block; /* 모바일 화면에서 버튼 표시 */
+    }
+
+    /*.navList {*/
+    /*    display: none; !* 모바일 화면에서는 네비게이션 리스트 숨김 *!*/
+    /*}*/
+}
