@@ -19,11 +19,19 @@
 }
 
 .navItem {
+    padding: 5px 10px 5px 10px;
+    opacity: 50%;
+    /*border-bottom: 1px solid #444; !* 각 항목을 구분하기 위한 테두리를 추가 *!*/
+}
+
+.navItemTopic {
     padding: 10px;
-    border-bottom: 1px solid #444; /* 각 항목을 구분하기 위한 테두리를 추가 */
+    /*border-bottom: 1px solid #444; !* 각 항목을 구분하기 위한 테두리를 추가 *!*/
+    font-size: 1em;
 }
 
 /* 사이드바 항목에 마우스를 올렸을 때의 스타일 */
+
 .navItem:hover {
     background-color: #444;
 }
@@ -38,8 +46,8 @@
 
 .subNavItem {
     padding: 5px 10px; /* 하위 항목은 조금 더 작은 패딩 */
-    border-bottom: 1px solid #555; /* 하위 항목을 구분하기 위한 테두리 */
-    font-size: 0.9em; /* 폰트 크기를 조금 더 작게 */
+    /*border-bottom: 1px solid #555; !* 하위 항목을 구분하기 위한 테두리 *!*/
+    font-size: 0.8em; /* 폰트 크기를 조금 더 작게 */
 }
 
 .subNavItem:hover {

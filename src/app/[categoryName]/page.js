@@ -15,7 +15,7 @@ const CategoryPage = () => {
         const processedIds = new Set();
 
         // 카테고리 JSON 파일을 불러온다.
-        fetch(`/data/categories/${params.get('categoryId')}.json`)
+        fetch(`/data/categories/${params.get('categoryId')}.json`, { next: { revalidate: 3600 } })
             .then(response => response.json())
             .then(async data => {
                 // 각 카테고리에 대한 추가적인 데이터를 불러온다.
@@ -26,7 +26,7 @@ const CategoryPage = () => {
                     }
                     processedIds.add(categoryList.id);
 
-                    const response = await fetch(`/data/posts/${params.get('categoryId')}/${categoryList.id}.json`);
+                    const response = await fetch(`/data/posts/${params.get('categoryId')}/${categoryList.id}.json`, { next: { revalidate: 3600 } });
                     const postData = await response.json();
                     // 원문 글에서 데이터 파싱하기
                     const parser = new DOMParser();
@@ -62,7 +62,7 @@ const CategoryPage = () => {
             <div className={styles.head}>여기는 {pathname.split("/").pop()} 카테고리 페이지입니다.</div>
             <div className={styles.container}>
                 {Object.entries(categoryLists).map(([key, categoryList]) => (
-                    <Link href={categoryList.postUrl} target={'_blank'}>
+                    <Link key={key} href={categoryList.postUrl} target={'_blank'}>
                         <div className={styles.list}>
                             <div className={styles.listHead}>
                                 {categoryList.title}

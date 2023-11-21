@@ -1,18 +1,31 @@
+"use client"
 // components/SideBar/SideBar.js
 
 import Link from 'next/link';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './SideBar.module.css';
-import categoriesData from '../../data/categories.json'; // JSON 데이터를 import.
 
 const SideBar = () => {
+    const [categoriesData, setCategoriesData] = useState(null);
+
+    useEffect(() => {
+        fetch('/data/categories.json', { next: { revalidate: 3600 } })
+            .then(response => response.json())
+            .then(data => setCategoriesData(data))
+            .catch(error => console.error('Error loading categories:', error));
+    }, []);
+
+    if (!categoriesData) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <nav className={styles.sideBar}>
             <ul className={styles.navList}>
                 {categoriesData.categories.map((category) => (
-                    <li key={category.id} className={styles.navItem}>
+                    <li key={category.id} className={category.label.includes('#') ? styles.navItemTopic : styles.navItem}>
                         {category.label.includes('#') ? (
-                            <span>{category.label}</span>
+                            <span >{category.label}</span>
                         ) : (
                             <Link href={`/${category.name}?categoryId=${category.id}`}>
                                 {category.label}
