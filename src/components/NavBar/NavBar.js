@@ -1,15 +1,19 @@
-import Link from 'next/link';
-import styles from './NavBar.module.css'; // CSS 모듈을 사용하려면 먼저 생성해야 합니다.
+"use client"
 
-const NavBar = () => {
+import React, {useState, useEffect} from 'react';
+import Link from 'next/link';
+import styles from './NavBar.module.css'; // CSS 모듈을 사용하려면 먼저 생성해야 한다.
+
+const NavBar = ({showMobileSideBar, setShowMobileSideBar}) => {
+
     const toggleSideBar = () => {
         // SideBar의 토글 로직을 여기에 구현
-        // 예: document.querySelector('.sideBar').classList.toggle('active');
+        setShowMobileSideBar(true);
     };
 
     return (
         <nav className={styles.navBar}>
-            <button className={styles.menuToggle} onClick={toggleSideBar()}>
+            <button className={styles.menuToggle} onClick={toggleSideBar}>
                 메뉴 펼치기
             </button>
             <ul className={styles.navList}>

@@ -2,10 +2,14 @@
 // components/SideBar/SideBar.js
 
 import Link from 'next/link';
-import React, { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+import React, { useState, useEffect, useRef } from 'react';
 import styles from './SideBar.module.css';
 
-const SideBar = () => {
+
+const SideBar = ({showMobileSideBar, setShowMobileSideBar}) => {
+    const sideBarRef = useRef();
+    const pathname = usePathname();
     const [categoriesData, setCategoriesData] = useState(null);
 
     useEffect(() => {
@@ -15,19 +19,40 @@ const SideBar = () => {
             .catch(error => console.error('Error loading categories:', error));
     }, []);
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (sideBarRef.current && !sideBarRef.current.contains(event.target)) {
+                setShowMobileSideBar(false);
+            }
+        };
+
+        // 전체 페이지에 클릭 이벤트 리스너 추가
+        document.addEventListener('click', handleClickOutside);
+
+        // 클린업 함수
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, [showMobileSideBar])
+
+    useEffect(() => {
+        console.log(pathname);
+        setShowMobileSideBar(false);
+    },[pathname])
+
     if (!categoriesData) {
         return <div>Loading...</div>;
     }
 
     return (
-        <nav className={styles.sideBar}>
+        <nav ref={sideBarRef} onClick={(e) => e.stopPropagation()} className={` ${showMobileSideBar ? styles.sideBarOpen :styles.sideBar}`}>
             <ul className={styles.navList}>
                 {categoriesData.categories.map((category) => (
                     <li key={category.id} className={category.label.includes('#') ? styles.navItemTopic : styles.navItem}>
                         {category.label.includes('#') ? (
                             <span >{category.label}</span>
                         ) : (
-                            <Link href={`/${category.name}?categoryId=${category.id}`}>
+                            <Link className={styles.linkItem} href={`/${category.name}?categoryId=${category.id}`}>
                                 {category.label}
                             </Link>
                         )}
@@ -36,7 +61,7 @@ const SideBar = () => {
                             <ul className={styles.subNavList}>
                                 {category.subCategories.map((subCategory) => (
                                     <li key={subCategory.id} className={styles.subNavItem}>
-                                        <Link href={`/${category.name}/${subCategory.name}?categoryId=${subCategory.id}`}>
+                                        <Link className={styles.linkItem} href={`/${category.name}/${subCategory.name}?categoryId=${subCategory.id}`}>
                                             {subCategory.label}
                                         </Link>
                                     </li>
